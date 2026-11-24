@@ -6,9 +6,9 @@ from android.runnable import run_on_ui_thread
 
 URL = "https://onrender.com"
 
-WebView = autoclass('android.webkit.WebView')
-WebViewClient = autoclass('android.webkit.WebViewClient')
-activity = autoclass('org.kivy.android.PythonActivity').mActivity
+WebView = autoclass("android.webkit.WebView")
+WebViewClient = autoclass("android.webkit.WebViewClient")
+activity = autoclass("org.kivy.android.PythonActivity").mActivity
 
 class WebApp(App):
     def build(self):
@@ -25,5 +25,5 @@ class WebApp(App):
         activity.setContentView(webview)
         webview.loadUrl(URL)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     WebApp().run()

@@ -1,26 +1,17 @@
-name: Build Doxachkaa UC APK
-on:
-  push:
-    branches: [main, doxachkaa-uc]
+name: Build APK
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
         with:
-          distribution: temurin
-          java-version: '17'
-      - uses: actions/setup-python@v5
+          command: buildozer android debug
+          repository_root: .
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
-          python-version: '3.11'
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.24.5'
-          channel: stable
-      - run: pip install flet==0.25.2
-      - run: flet build apk --project "Doxachkaa UC" --org com.doxachkaa.uc
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Doxachkaa UC_APK
-          path: build/apk/app-release.apk
+          name: Doxachkaa-UC-APK
+          path: bin/*.apk
